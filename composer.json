@@ -1,0 +1,29 @@
+{
+    "name": "ruchama.as/ecomws",
+    "description": "Connection to api",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Rl-group",
+            "email": "ruchama604@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0",
+        "guzzlehttp/guzzle": "~6.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~6.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ecomws\\": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}
+
