@@ -20,7 +20,14 @@ class UpdateCustomerClub extends Base
      * @var array
      */
     protected $customer;
-
+    /*[
+        //'C' => 'yehdua',
+        'Name' => 'yehdua2',
+        'ComaxC' => '98999982443',
+        'Email' => 'yehdua11114@gmail.com',
+        'Password' => 'yehdua123',
+        'IdNumber' => '4'
+     ]*/
 
     public function setCustomer($customer)
     {
@@ -35,7 +42,38 @@ class UpdateCustomerClub extends Base
      * @var array
      */
     protected $address;
-
+    /*  [
+    'CustomerAddress' =>
+        'Id' => 'yehdua',//C or 0
+        'CustomerId' => 'yehdua',
+        'FirstName' => 'yehdua',
+        'LastName' => 'yehdua',
+        'Mobile' => 'yehdua',
+        'AddressRemark' => 'yehdua',
+        'City' => 'yehdua',
+        'Street' => 'yehdua',
+        'Number' => '3',
+        'Neighborhood' => 'yehdua',
+        'Flat' => 'yehdua',
+        'Koma' => 'yehdua',
+        'ZipCode' => 'yehdua',
+        'Structure' => 'yehdua',
+        'Floor' => 'yehdua',
+        'Apartment' => 'yehdua',
+        'Entrance' => 'yehdua',
+        'Elevator' => 'yehdua',
+        'Notes' => 'yehdua',
+        'Street' => 'yehdua',
+        'City' => 'yehdua',
+        'OrderNumber' => 'yehdua',
+        'AddressName' => 'yehdua',
+        'StoreAddressId' => 'yehdua',
+        'IsDefault' => 'yehdua',
+        'IsSelfPickUp' => 'yehdua',
+        'StoreName' => 'yehdua',
+        'StoreAddres' => 'yehdua',
+        'SelfPickUpShipmentRemark' => 'yehdua'
+    ]*/
 
     public function setAddress($address)
     {

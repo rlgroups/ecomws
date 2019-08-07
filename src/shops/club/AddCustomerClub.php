@@ -18,6 +18,44 @@ class AddCustomerClub extends Base
      *
      * @var array
      */
+    /*
+    [
+    //'C' => 'yehdua',
+    'Name' => 'yehdua',
+    'LastName' => 'f',
+    'UserName' => 'yehduaF',
+    'IdentityCard' => '206666663',
+    'PhoneCode' => '08',
+    'Phone' => '9699696',
+    'PelefonCode' => '054',
+    'Pelefon' => '8592663',
+    'Email' => 'yehdua1a111a23ss345@gmail.com',
+    'Password' => 'yehdua123',
+    'PasswordRepeat' => 'yehdua123',
+    //'DateOpen' => '',
+    //'DateClose' => '',
+    'Active' => 1,
+    'NotSendEmail' => 'true',
+    'NotSendSMS' => 'true',
+    'IsSelfPickUp' => 'true',
+    //'SelfPickUpStoreId' => '1',
+    //'StoreKod ' => 1,
+    'ShowMessage' => 'true',
+    'BirthDate' => '',
+    'LogActivity' => 'true',
+    'NotPaying' => 'true',
+    //'swFirstTimeClub' => '1',
+    //'swCustomerClub' => '0',
+    'IsBusinessCustomer' => 'false',
+    'hasList' => 'false',
+    //'shopListId' => '4',
+    // 'CustomerAddress'=> [
+    //     'CustomerAddress' => [
+    //         'Number' => '1'
+    //     ]
+    // ]
+     ]
+    */
     protected $customer;
 
 
@@ -33,6 +71,38 @@ class AddCustomerClub extends Base
      *
      * @var array
      */
+    /*['CustomerAddress' => [
+        'Id' => 0,
+        'CustomerId' => 0,
+        'FirstName' => 'yehdua',
+        'LastName' => 'yehdua',
+        'Mobile' => '',
+        'AddressRemark' => '',
+        'CityId' => '2',
+        'StreetId' => '3',
+        'Number' => '3',
+        'Neighborhood' => 'החשמונאים',
+        'Flat' => '',
+        'Koma' => '2',
+        'ZipCode' => '12345',
+        'Structure' => '',
+        'Floor' => '',
+        'Apartment' => '',
+        'Entrance' => '',
+        'Elevator' => '',
+        'Notes' => '',
+        'Street' => '',
+        'City' => '',
+        'OrderNumber' => '',
+        'AddressName' => '',
+        'StoreAddressId' => '',
+        'IsDefault' => '',
+        'IsSelfPickUp' => '',
+        'StoreName' => '',
+        'StoreAddres' => '',
+        'SelfPickUpShipmentRemark' => ''
+        ]
+     ]*/
     protected $address;
 
 
