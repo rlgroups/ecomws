@@ -77,8 +77,7 @@ class AddressAutocomplete extends Base
     public function toArray()
     {
         return [
-            'LoginID' => Self::$loginID,
-            'LoginPassword' => Self::$loginPassword,
+            'Token' => Self::$token,
             'City' => $this->city,
             'Street' => $this->street,
             'Number' => $this->number,

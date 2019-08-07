@@ -1,7 +1,7 @@
 <?php
-
 namespace Ecomws;
 
+use DB;
 use FluidXml\FluidXml;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
@@ -31,7 +31,7 @@ trait ApiRequestor {
         $apiBase = static::$apiBase;
 
         $baseUrl = "https://{$host}/{$apiBase}/{$this->endPoint}";
-        
+
         $xmlRequest = $this->bulidXml($action, $params->jsonSerialize());
 
         return $this->getResponse($xmlRequest);
@@ -39,6 +39,8 @@ trait ApiRequestor {
 
     public function getResponse($xmlRequest)
     {
+        $request_send;
+
         $http = new Client([
             // 'curl' => [CURLOPT_SSL_VERIFYPEER => false],
             // 'verify' => false,
@@ -55,6 +57,7 @@ trait ApiRequestor {
         $status = 1;
 
         try {
+            $request_send = date("Y-m-d H:i:s");
             $responseData = $http->request('POST', $baseUrl, [
                 'body' => $xmlRequest,
                 'headers' => [
@@ -66,7 +69,6 @@ trait ApiRequestor {
 
          } catch (RequestException $e) {
             $status = 0;
-            //dd($xmlRequest);
             $responseData = [
                 'RequestException' => $e->getRequest()
             ];
@@ -74,7 +76,10 @@ trait ApiRequestor {
 
         if ($responseData && $status) {
             $xmlResponse = (string) $responseData->getBody();
-
+            $data = $this->mapResponse(
+                        $this->xmlToArray($xmlResponse)
+                    );
+            $this->outputLog($xmlRequest, $xmlResponse, $request_send, $data);
             // log
             // return dd([
             //     $xmlRequest, $xmlResponse
@@ -89,9 +94,7 @@ trait ApiRequestor {
             //     ];
             // }
 
-            return $this->mapResponse(
-                $this->xmlToArray($xmlResponse)
-            );
+            return $data;
         }
 
         return [
@@ -109,7 +112,7 @@ trait ApiRequestor {
             $data = $array['soap:Body']["{$this->endPoint}Response"]["{$this->endPoint}Result"];
 
             $status = isset($data['Status']) ? $data['Status'] : '3';
-            
+
             return [
                 'status' => $status,
                 'data' => $array['soap:Body']["{$this->endPoint}Response"]["{$this->endPoint}Result"],
@@ -170,16 +173,19 @@ trait ApiRequestor {
 
     }
 
-    public function outputLog($xmlRequest, $xmlResponse)
+    public function outputLog($xmlRequest, $xmlResponse, $request_send, $data)
     {
         $log = [
-            'uuid' => self::$uuid ?? null,
-            'called' => get_called_class(),
-            'request' => (string) $xmlRequest,
-            'response' => (string) $xmlResponse
+            'user_id' => null,
+            'called' => $this->endPoint,
+            'ip' =>  request()->ip(),
+            'request' => $xmlRequest,
+            'response' => $xmlResponse,
+            'data' => json_encode($data),
+            'request_at' => $request_send,
+            'response_at' => date('Y-m-d H:i:s')
         ];
-
-        // Log::create($log);
+        DB::table('logs')->insert($log);
     }
 
     function xmlToArray($xml) {
@@ -274,10 +280,5 @@ trait ApiRequestor {
         }
 
         return $array;
-    }
-
-    public function logDb($xmlRequest, $response)
-    {
-        //
     }
 }

@@ -58,26 +58,10 @@ class GetSupplyDate extends Base
         return $this;
     }
 
-    /**
-     * The string of searchterm.
-     *
-     * @var string
-     */
-    protected $searchterm;
-
-
-    public function setSearchterm($searchterm)
-    {
-        $this->searchterm = $searchterm;
-
-        return $this;
-    }
-
     public function toArray()
     {
         return [
-            'LoginID' => Self::$loginID,
-            'LoginPassword' => Self::$loginPassword,
+            'Token' => Self::$token,
             'City' => $this->city,
             'Street' => $this->street,
             'StreetNo' => $this->streetNo

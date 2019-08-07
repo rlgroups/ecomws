@@ -28,28 +28,11 @@ class GetMivzaPrtInKupa extends Base
         return $this;
     }
 
-    /**
-     * The array of addItem.
-     *
-     * @var array
-     */
-    protected $addItem;
-
-
-    public function setAddItem($addItem)
-    {
-        $this->addItem = $addItem;
-
-        return $this;
-    }
-
-
     public function toArray()
     {
         return [
             'Token' => Self::$token,
-            'StoreId' => $this->storeId,
-            'addItem' => $this->addItem
+            'StoreId' => $this->storeId
         ];
     }
 
