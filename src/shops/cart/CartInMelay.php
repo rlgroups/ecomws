@@ -32,6 +32,8 @@ class CartInMelay extends Base
     public function toArray()
     {
         return [
+            'LoginID' => Self::$loginID,
+            'LoginPassword' => Self::$loginPassword,
             'Token' => Self::$token,
             'StoreId' => $this->storeId
         ];

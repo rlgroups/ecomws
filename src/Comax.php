@@ -26,6 +26,13 @@ class Comax
     public static $log = false;
 
     /**
+     * The reLogin function.
+     *
+     * @var string
+     */
+    public $reLogin = false;
+
+    /**
      * The version of the Comax API to use for requests.
      *
      * @var string
@@ -40,6 +47,10 @@ class Comax
         self::$apiHost = $config['Host'];
         self::$log = $config['log'] ?? false;
 
+    }
+
+    public function setReLogin($function) {
+        $this->reLogin = $function();
     }
 
 }

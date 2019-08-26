@@ -20,7 +20,7 @@ class ResetPassword extends Base
      * @var string
      */
     protected $email;
-    
+
 
     public function setEmail($email)
     {

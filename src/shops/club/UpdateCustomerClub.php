@@ -86,6 +86,8 @@ class UpdateCustomerClub extends Base
     public function toArray()
     {
         return [
+            'LoginID' => Self::$loginID,
+            'LoginPassword' => Self::$loginPassword,
             'Token' => Self::$token,
             'customer' => $this->customer,
             'address' => $this->address

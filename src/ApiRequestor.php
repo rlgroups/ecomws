@@ -19,13 +19,21 @@ trait ApiRequestor {
     // }
     public function request()
     {
-        return $this->getRequest($this);
+        tryRequest:
+        $response = $this->getRequest($this);
+
+        if ($this->reLogin && $response['status'] == 403) {
+            $this->reLogin;
+            goto tryRequest;
+        }
+
+        return $response;
     }
 
     public function getRequest($params)
     {
         $action = $this->endPoint;
-
+        //$host = 'ecomwsprod.binaprojects.com';
         $host = static::$apiHost;
 
         $apiBase = static::$apiBase;
@@ -67,33 +75,26 @@ trait ApiRequestor {
                 ]
             ]);
 
+            $xmlResponse = (string) $responseData->getBody();
+
+            $data = $this->mapResponse(
+                $this->xmlToArray($xmlResponse)
+            );
+            //var_dump( $xmlResponse);
+            //var_dump( $data['data']['Prt']["ClsPrtMivza"]);
+            //dd();
          } catch (RequestException $e) {
             $status = 0;
+
             $responseData = [
                 'RequestException' => $e->getRequest()
             ];
+            $data = $xmlResponse = null;
         }
 
+        $this->outputLog($xmlRequest, $xmlResponse, $request_send, $data);
+
         if ($responseData && $status) {
-            $xmlResponse = (string) $responseData->getBody();
-            $data = $this->mapResponse(
-                        $this->xmlToArray($xmlResponse)
-                    );
-            $this->outputLog($xmlRequest, $xmlResponse, $request_send, $data);
-            // log
-            // return dd([
-            //     $xmlRequest, $xmlResponse
-            // ]);
-
-            // print_r($xmlRequest);
-            // exit;
-
-            // if (static::$log || 1) {
-            //     return [
-            //         $xmlRequest, $xmlResponse
-            //     ];
-            // }
-
             return $data;
         }
 
@@ -181,7 +182,7 @@ trait ApiRequestor {
             'ip' =>  request()->ip(),
             'request' => $xmlRequest,
             'response' => $xmlResponse,
-            'data' => json_encode($data),
+            'data' => isset($data) ? json_encode($data) : null,
             'request_at' => $request_send,
             'response_at' => date('Y-m-d H:i:s')
         ];

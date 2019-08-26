@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 namespace Ecomws\Order;
 
@@ -14,76 +14,16 @@ class GetStatusOrder extends Base
     protected $endPoint = 'GetStatusOrder';
 
     /**
-     * The string of statusCode.
+     * The string of orderC.
      *
      * @var string
      */
-    protected $statusCode;
+    protected $orderC;
 
 
-    public function setStatusCode($statusCode)
+    public function setOrderC($orderC)
     {
-        $this->statusCode = $statusCode;
-
-        return $this;
-    }
-
-    /**
-     * The string of closeOrder.
-     *
-     * @var string
-     */
-    protected $closeOrder;
-
-
-    public function setCloseOrder($closeOrder)
-    {
-        $this->closeOrder = $closeOrder;
-
-        return $this;
-    }
-
-    /**
-     * The string of statusNm.
-     *
-     * @var string
-     */
-    protected $statusNm;
-
-
-    public function setStatusNm($statusNm)
-    {
-        $this->statusNm = $statusNm;
-
-        return $this;
-    }
-
-    /**
-     * The string of message.
-     *
-     * @var string
-     */
-    protected $message;
-
-
-    public function setMessage($message)
-    {
-        $this->message = $message;
-
-        return $this;
-    }
-
-    /**
-     * The string of status.
-     *
-     * @var string
-     */
-    protected $status;
-
-
-    public function setStatus($status)
-    {
-        $this->status = $status;
+        $this->orderC = $orderC;
 
         return $this;
     }
@@ -92,12 +32,8 @@ class GetStatusOrder extends Base
     public function toArray()
     {
         return [
-            'StatusCode' => $this->statusCode,
-            'CloseOrder' => $this->closeOrder,
-            'StatusNm' => $this->statusNm,
-            'Message' => $this->message,
-            'Status' => $this->status,
-            'Token' => Self::$token
+            'Token' => Self::$token,
+            'OrderC' => $this->orderC
         ];
     }
 

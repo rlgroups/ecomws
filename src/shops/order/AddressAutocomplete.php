@@ -81,7 +81,7 @@ class AddressAutocomplete extends Base
             'City' => $this->city,
             'Street' => $this->street,
             'Number' => $this->number,
-            'searchterm' => $this->searchterm,
+            'searchterm' => $this->searchterm
         ];
     }
 

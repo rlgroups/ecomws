@@ -47,7 +47,7 @@ class CompleteOrder extends Base
     public function toArray()
     {
         return [
-            'Token' => Self::$token,
+            'Token' => 'd653e036-6817-437b-aff9-1f9ac270f97f',//Self::$token,
             'order' => $this->order,
             'Items' => $this->items
         ];

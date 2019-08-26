@@ -19,7 +19,7 @@ class LoginWithFacebook extends Base
      * @var string
      */
     protected $email;
-    
+
 
     public function setEmail($email)
     {
@@ -27,14 +27,14 @@ class LoginWithFacebook extends Base
 
         return $this;
     }
-    
+
     /**
      * The string of firstName.
      *
      * @var string
      */
     protected $firstName;
-    
+
 
     public function setFirstName($firstName)
     {
@@ -42,14 +42,14 @@ class LoginWithFacebook extends Base
 
         return $this;
     }
-    
+
     /**
      * The string of lastName.
      *
      * @var string
      */
     protected $lastName;
-    
+
 
     public function setLastName($lastName)
     {
@@ -63,7 +63,7 @@ class LoginWithFacebook extends Base
         return [
             'LoginID' => Self::$loginID,
             'LoginPassword' => Self::$loginPassword,
-            'Token' => Self::$token,
+            'TokenFacebook' => $this->tokenFacebook,
             'Email' => $this->email,
             'firstName' => $this->firstName,
             'lastName' => $this->lastName
