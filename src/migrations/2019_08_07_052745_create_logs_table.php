@@ -18,9 +18,9 @@ class CreateLogsTable extends Migration
             $table->integer('user_id')->nullable();
             $table->string('called')->nullable()->index();
             $table->ipAddress('ip')->nullable()->index();
-            $table->text('request')->nullable();
-            $table->text('response')->nullable();
-            $table->text('data')->nullable();
+            $table->longText('request')->nullable();
+            $table->longText('response')->nullable();
+            $table->longText('data')->nullable();
             $table->timestamp('request_at')->nullable()->index();
             $table->timestamp('response_at')->nullable();
             $table->timestamps();
