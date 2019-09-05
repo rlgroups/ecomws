@@ -1,11 +1,18 @@
 <?php
 
-namespace Ecomws\Cart;
+namespace Ecomws\Order;
 
-use Ecomws\Cart\Base;
+use Ecomws\Order\Base;
 
 class GetMelayStoreByAddress extends Base
 {
+    /**
+     * The string of endPoint.
+     *
+     * @var string
+     */
+    protected $endPoint = 'GetMelayStoreByAddress';
+
     /**
      * The int of cityId.
      *
@@ -51,23 +58,23 @@ class GetMelayStoreByAddress extends Base
         return $this;
     }
 
-    /**
-     * The string of endPoint.
-     *
-     * @var string
-     */
-    protected $endPoint = 'GetMelayStoreByAddress';
-
     public function toArray()
     {
         return [
-            /*'LoginID' => Self::$loginID,
-            'LoginPassword' => Self::$loginPassword,*/
-            'Token' => Self::$token,
-            'CityId' => $this->cityId,
-            'StreetId' => $this->streetId,
-            'StreetNo' => $this->streetNo
+            'LoginID' => Self::$loginID,
+            'LoginPassword' => Self::$loginPassword,
+            //'Token' => Self::$token,
+            'CityId' => $this->cityId,//245
+            /*'StreetId' => $this->streetId,
+            'StreetNo' => $this->streetNo*/
         ];
     }
-
+     public function mapDataResponse($data)
+    {
+        return [
+            'area_id' => $data['AreaId'],
+            'store_id' => $data['StoreId'],
+            'status' => $data['Status']
+        ];
+    }
 }

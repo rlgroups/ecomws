@@ -84,4 +84,11 @@ class GetSupplyDateAvailab extends Base
         ];
     }
 
+    public function mapDataResponse($data)
+    {
+        return [
+            'Status' => '200',
+            'data' => $data
+        ];
+    }
 }

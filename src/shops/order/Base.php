@@ -41,7 +41,7 @@ class Base extends Comax
 
         return $this;
     }
-    
+
     /**
      * Sets the API loginPassword to be used for requests.
      *

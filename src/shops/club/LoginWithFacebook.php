@@ -14,6 +14,21 @@ class LoginWithFacebook extends Base
     protected $endPoint = 'LoginWithFacebook';
 
     /**
+     * The string of tokenFacebook.
+     *
+     * @var string
+     */
+    protected $tokenFacebook;
+
+
+    public function setTokenFacebook($tokenFacebook)
+    {
+        $this->tokenFacebook = $tokenFacebook;
+
+        return $this;
+    }
+
+    /**
      * The string of email.
      *
      * @var string
@@ -63,7 +78,7 @@ class LoginWithFacebook extends Base
         return [
             'LoginID' => Self::$loginID,
             'LoginPassword' => Self::$loginPassword,
-            'TokenFacebook' => $this->tokenFacebook,
+            'Token' => 'EAAhBoECWZAW0BADDJQXMesczs9m00gnzNvsxZBGg6V9Rv5ZBZADEseh1DX6XR1VZCAXeryXGtqyH6kVrwxAW4oWNTCpJpuJMu1wvBF0ztEPoUkCboMyaNZBKMUNW58JeDxeZByM0JfQkJDIlaUMZBX8UZBmwZBiNrOBkbIiCI4hjxi0cVc1qOwVqd03bSQyZBmKD8RbFiVF4EJ0QKtvcLP9NBeH',//$this->tokenFacebook,
             'Email' => $this->email,
             'firstName' => $this->firstName,
             'lastName' => $this->lastName

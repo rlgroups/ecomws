@@ -20,4 +20,11 @@ class DeleteCart extends Base
         ];
     }
 
+    public function mapDataResponse($data)
+    {
+        return [
+            'Status' => $data
+        ];
+    }
+
 }

@@ -20,4 +20,12 @@ class CustomerCredit extends Base
         ];
     }
 
+    public function mapDataResponse($data)
+    {
+        return [
+            'data' => $data['ListCredits']['CustomerCredit'],
+            'Status' => $data['Status']
+        ];
+    }
+
 }

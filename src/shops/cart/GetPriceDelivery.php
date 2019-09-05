@@ -67,5 +67,13 @@ class GetPriceDelivery extends Base
             'StoreId' => $this->storeId
         ];
     }
+    public function mapDataResponse($data)
+    {
+        return [
+            'itemC' => $data['ItemC'],
+            'price' => $data['Price'],
+            'Status' => $data['Status'],
+        ];
+    }
 
 }

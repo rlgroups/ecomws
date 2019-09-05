@@ -49,10 +49,19 @@ class InsertTempSupplyDateToUser extends Base
         return [
             'LoginID' => Self::$loginID,
             'LoginPassword' => Self::$loginPassword,
-            'Token' => Self::$token,
+            //'Token' => Self::$token,
             'SupplyDay' => $this->supplyDay,
             'SupplyDate' => $this->supplyDate,
         ];
     }
-
+     public function mapDataResponse($data)
+    {
+        if($data == 'true' || $data == 'false'){
+            $data = [
+                'data' => $data,
+                'Status' => '200'
+            ];
+        }
+        return $data;
+    }
 }

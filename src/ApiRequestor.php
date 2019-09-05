@@ -19,15 +19,23 @@ trait ApiRequestor {
     // }
     public function request()
     {
-        tryRequest:
+        //tryRequest:
         $response = $this->getRequest($this);
 
-        if ($this->reLogin && $response['status'] == 403) {
+        /*if ($this->reLogin && $response['status'] == 403) {
             $this->reLogin;
             goto tryRequest;
         }
-
+*/
         return $response;
+    }
+
+    public static function filterEmptyField($array)
+    {
+        return collect($array)
+            ->filter(function ($field) {
+                return ($field !== null) || ($field != '');
+            })->toArray();
     }
 
     public function getRequest($params)
@@ -83,13 +91,21 @@ trait ApiRequestor {
             //var_dump( $xmlResponse);
             //var_dump( $data['data']['Prt']["ClsPrtMivza"]);
             //dd();
-         } catch (RequestException $e) {
+         } catch (\GuzzleHttp\Exception\BadResponseException $e) {
             $status = 0;
 
+            $response = $e->getResponse();
+            $jsonBody = (string) $response->getBody();
+
+            // dd($jsonBody);
             $responseData = [
-                'RequestException' => $e->getRequest()
+                'RequestException' => $jsonBody
             ];
-            $data = $xmlResponse = null;
+
+            // dd($e->getResponse());
+
+            $xmlResponse = $jsonBody;
+            $data = null;
         }
 
         $this->outputLog($xmlRequest, $xmlResponse, $request_send, $data);
@@ -99,8 +115,13 @@ trait ApiRequestor {
         }
 
         return [
-            'status' => '0'
+            'status' => '0',
         ];
+    }
+
+    public function mapDataResponse($data)
+    {
+        return $data;
     }
 
     public function mapResponse($array)
@@ -116,7 +137,7 @@ trait ApiRequestor {
 
             return [
                 'status' => $status,
-                'data' => $array['soap:Body']["{$this->endPoint}Response"]["{$this->endPoint}Result"],
+                'data' => $this->mapDataResponse($array['soap:Body']["{$this->endPoint}Response"]["{$this->endPoint}Result"]),
                 'all_data' => $array['soap:Body']
             ];
         } else {
