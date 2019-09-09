@@ -22,8 +22,17 @@ class CustomerCredit extends Base
 
     public function mapDataResponse($data)
     {
+        $data['data'] = $data['ListCredits'] && !empty($data['ListCredits']['CustomerCredit'])
+            ? (
+                isset($data['ListCredits']['CustomerCredit'][0])
+                    ? $data['ListCredits']['CustomerCredit']
+                    : [$data['ListCredits']['CustomerCredit']]
+                )
+            : null;
+
+
         return [
-            'data' => $data['ListCredits']['CustomerCredit'],
+            'data' => $data['data'] ,
             'Status' => $data['Status']
         ];
     }

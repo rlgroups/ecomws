@@ -56,7 +56,14 @@ class GetCustomersOrders extends Base
 
     public function mapDataResponse($data)
     {
-        //return $data['GetCustomersOrdersResponse'];
+        if(!empty($data['ListOrders']) && !empty($data['ListOrders']['ClsGetCustomersOrdersOutList'])){
+            $data['ListOrders']['ClsGetCustomersOrdersOutList'] =
+            $data['ListOrders']['ClsGetCustomersOrdersOutList'] && isset($data['ListOrders']['ClsGetCustomersOrdersOutList'][0])
+                ? $data['ListOrders']['ClsGetCustomersOrdersOutList']
+                : [$data['ListOrders']['ClsGetCustomersOrdersOutList']];
+
+        }
+
         return collect($data['ListOrders']['ClsGetCustomersOrdersOutList'] ?? [])->map(function ($order) {
             return [
                 'doc_number' => $order['DocNumber'] ?? null,
@@ -79,7 +86,7 @@ class GetCustomersOrders extends Base
                 'apartment' => $order['Apartment'] ?? null,
                 'token_card' => $order['TokenCard'] ?? null,
                 'remarks' => $order['Remarks'] ?? null,
-                'close_order' => $order['CloseOrder'] ?? null,
+                'close_order' => $order['ListItemsInOrder'] ?? null,
                 'items' => collect($order['ListItemsInOrder']['ClsGetCustomersOrdersOut'])->map(function ($item) {
                     return [
                         //'addressAsp' => $item['addressAsp'] ?? null,
