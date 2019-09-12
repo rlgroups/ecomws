@@ -23,4 +23,11 @@ class CreditGetTokenLogin extends Base
         ];
     }
 
+    public function mapDataResponse($data)
+    {
+        return [
+            'data' => $data,
+            'Status' => '200'
+        ];
+    }
 }

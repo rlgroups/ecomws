@@ -68,4 +68,16 @@ class ValidateAddress extends Base
         ];
     }
 
+    public function mapDataResponse($data)
+    {
+        return [
+                'data' => [
+                    'status' => $data['Status'],
+                    'store_id' => $data['StoreId'],
+                    'area_id' => $data['areaId'],
+                    'zip_code' => $data['zipCode'],
+                ],
+                'Status' => '200'
+            ];
+    }
 }

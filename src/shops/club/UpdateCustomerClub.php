@@ -94,4 +94,18 @@ class UpdateCustomerClub extends Base
         ];
     }
 
+    public function mapDataResponse($data)
+    {
+        if ($data == 403) {
+            return [
+                'Status' => '403'
+            ];
+        }
+
+        return [
+            'data' => $data,
+            'Status' => $data
+        ];
+    }
+
 }

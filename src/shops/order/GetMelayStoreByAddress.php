@@ -72,9 +72,11 @@ class GetMelayStoreByAddress extends Base
      public function mapDataResponse($data)
     {
         return [
-            'area_id' => $data['AreaId'],
-            'store_id' => $data['StoreId'],
-            'status' => $data['Status']
+            'Status' => '200',
+            'data' => [
+                'area_id' => $data['AreaId'],
+                'store_id' => $data['StoreId'],
+            ]
         ];
     }
 }

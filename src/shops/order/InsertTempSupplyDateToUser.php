@@ -54,7 +54,8 @@ class InsertTempSupplyDateToUser extends Base
             'SupplyDate' => $this->supplyDate,
         ];
     }
-     public function mapDataResponse($data)
+
+    public function mapDataResponse($data)
     {
         if($data == 'true' || $data == 'false'){
             $data = [

@@ -70,9 +70,11 @@ class GetPriceDelivery extends Base
     public function mapDataResponse($data)
     {
         return [
-            'itemC' => $data['ItemC'],
-            'price' => $data['Price'],
             'Status' => $data['Status'],
+            'data' => [
+                'itemC' => $data['ItemC'],
+                'price' => $data['Price']
+            ]
         ];
     }
 

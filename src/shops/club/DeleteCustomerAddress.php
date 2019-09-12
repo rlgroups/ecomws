@@ -19,7 +19,7 @@ class DeleteCustomerAddress extends Base
      * @var string
      */
     protected $addressId;
-    
+
     public function setAddressId($addressId)
     {
         $this->addressId = $addressId;
@@ -34,5 +34,22 @@ class DeleteCustomerAddress extends Base
             'AddressId' => $this->addressId
         ];
     }
+
+    public function mapDataResponse($data)
+    {
+        return [
+            'data' => $data,
+            'Status' => $data
+        ];
+    }
+
+    public function mapDataResponse($data)
+    {
+        return [
+            'data' => $data,
+            'Status' => $data
+        ];
+    }
+
 
 }

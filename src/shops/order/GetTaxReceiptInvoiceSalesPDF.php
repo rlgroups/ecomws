@@ -13,7 +13,7 @@ class GetTaxReceiptInvoiceSalesPDF extends Base
      */
     protected $endPoint = 'Get_TaxReceiptInvoiceSalesPDF';
 
-    
+
 
     /**
      * The int of orderC.
@@ -38,4 +38,13 @@ class GetTaxReceiptInvoiceSalesPDF extends Base
         ];
     }
 
+    public function mapDataResponse($data)
+    {
+        return [
+            'Status' => '200',
+            'data' => [
+                'pdf' => $data
+            ]
+        ];
+    }
 }

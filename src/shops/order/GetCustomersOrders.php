@@ -64,7 +64,8 @@ class GetCustomersOrders extends Base
 
         }
 
-        return collect($data['ListOrders']['ClsGetCustomersOrdersOutList'] ?? [])->map(function ($order) {
+        return [
+            'data' => collect($data['ListOrders']['ClsGetCustomersOrdersOutList'] ?? [])->map(function ($order) {
             return [
                 'doc_number' => $order['DocNumber'] ?? null,
                 'delivery_price' => $order['DeliveryPrice'] ?? null,
@@ -151,7 +152,9 @@ class GetCustomersOrders extends Base
                     ];
                 })
             ];
-        });
+                     }),
+            'Status' => $data['Status']
+        ];
 
     }
 

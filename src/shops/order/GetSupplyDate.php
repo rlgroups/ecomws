@@ -72,4 +72,18 @@ class GetSupplyDate extends Base
         ];
     }
 
+    public function mapDataResponse($data)
+    {
+        $data['data'] = !empty($data['ListTime']) && !empty($data['ListTime']['DaysTime'])
+            ? (
+                isset($data['ListTime']['DaysTime'][0])
+                    ? $data['ListTime']['DaysTime']
+                    : [$data['ListTime']['DaysTime']]
+                )
+            : null;
+        return [
+            'Status' => $data['Status'],
+            'data' => $data['data']
+        ];
+    }
 }

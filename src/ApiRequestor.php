@@ -86,7 +86,8 @@ trait ApiRequestor {
             $xmlResponse = (string) $responseData->getBody();
 
             $data = $this->mapResponse(
-                $this->xmlToArray($xmlResponse)
+                $this->xmlToArray($xmlResponse),
+                $xmlRequest
             );
             //var_dump( $xmlResponse);
             //var_dump( $data['data']['Prt']["ClsPrtMivza"]);
@@ -124,21 +125,22 @@ trait ApiRequestor {
         return $data;
     }
 
-    public function mapResponse($array)
+    public function mapResponse($array, $xmlRequest = null)
     {
         if (
             isset($array['soap:Body'])
             && isset($array['soap:Body']["{$this->endPoint}Response"])
             && isset($array['soap:Body']["{$this->endPoint}Response"]["{$this->endPoint}Result"])
         ) {
-            $data = $array['soap:Body']["{$this->endPoint}Response"]["{$this->endPoint}Result"];
+            $data = $this->mapDataResponse($array['soap:Body']["{$this->endPoint}Response"]["{$this->endPoint}Result"]);
 
             $status = isset($data['Status']) ? $data['Status'] : '3';
 
             return [
                 'status' => $status,
-                'data' => $this->mapDataResponse($array['soap:Body']["{$this->endPoint}Response"]["{$this->endPoint}Result"]),
-                'all_data' => $array['soap:Body']
+                'data' => $data['data'] ?? $data,
+                'all_data' => $array['soap:Body'],
+                'xmlRequest' => $xmlRequest
             ];
         } else {
             return [

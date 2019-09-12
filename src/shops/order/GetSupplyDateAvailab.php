@@ -76,7 +76,9 @@ class GetSupplyDateAvailab extends Base
     public function toArray()
     {
         return [
-            'Token' => Self::$token,
+            //'Token' => Self::$token,
+            'LoginID' => Self::$loginID,
+            'LoginPassword' => Self::$loginPassword,
             'SupplyDate' => $this->supplyDate,
             'SupplyArea' => $this->supplyArea,
             'SupplyFromHour' => $this->supplyFromHour,
