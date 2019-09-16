@@ -66,6 +66,13 @@ class GetCustomersOrders extends Base
 
         return [
             'data' => collect($data['ListOrders']['ClsGetCustomersOrdersOutList'] ?? [])->map(function ($order) {
+
+            $linesInOrder = $order['ListItemsInOrder']['ClsGetCustomersOrdersOut'];
+
+            if (!isset($linesInOrder[0])) {
+                $linesInOrder = [$linesInOrder];
+            }
+
             return [
                 'doc_number' => $order['DocNumber'] ?? null,
                 'delivery_price' => $order['DeliveryPrice'] ?? null,
@@ -87,49 +94,54 @@ class GetCustomersOrders extends Base
                 'apartment' => $order['Apartment'] ?? null,
                 'token_card' => $order['TokenCard'] ?? null,
                 'remarks' => $order['Remarks'] ?? null,
-                'close_order' => $order['ListItemsInOrder'] ?? null,
-                'items' => collect($order['ListItemsInOrder']['ClsGetCustomersOrdersOut'])->map(function ($item) {
+                'close_order' => $order['CloseOrder'] ?? null,
+                //'remarks' => $order['Remarks'] ?? null,
+                'pelefon' => !empty($order['TelAsp']) ? $order['TelAsp'] : null,
+                'name' => $order['FirstName'].' '. $order['LastName'] ?? null,
+                'loaded' => false,
+                'loadingItems' => false,
+                'items' => collect($linesInOrder)->map(function ($item) {
                     return [
                         //'addressAsp' => $item['addressAsp'] ?? null,
                         //'addressHomeNumber' => $item['AddressHomeNumber'] ?? null,
                         //'agentID' => $item['AgentID'] ?? null,
                         //'agentIdOfLukatThisLine' => $item['AgentIdOfLukatThisLine'] ?? null,
-                        'apartment' => $item['Apartment'] ?? null,
+                        //'apartment' => $item['Apartment'] ?? null,
                         //'attribute1Code' => $item['Attribute1Code'] ?? null,
                         //'attribute1Name' => $item['Attribute1Name'] ?? null,
                         //'attribute2Code' => $item['Attribute2Code'] ?? null,
                         //'attribute2Name' => $item['Attribute2Name'] ?? null,
                         //'attribute3Code' => $item['Attribute3Code'] ?? null,
                         //'attribute3Name' => $item['Attribute3Name'] ?? null,
-                        'card_number' => $item['CardNumber'] ?? null,
-                        'card_type' => $item['CardType'] ?? null,
+                        /////'card_number' => $item['CardNumber'] ?? null,
+                        /////'card_type' => $item['CardType'] ?? null,
                         //'cityAsp' => $item['CityAsp'] ?? null,
                         //'clientName' => $item['ClientName'] ?? null,
-                        'close_line' => $item['CloseLine'] ?? null,
-                        'close_order' => $item['CloseOrder'] ?? null,
+                        /////'close_line' => $item['CloseLine'] ?? null,
+                        //'close_order' => $item['CloseOrder'] ?? null,
                         //'dateAsp' => $item['DateAsp'] ?? null,
                         //'dateDoc' => $item['DateDoc'] ?? null,
                         //'deliveryPrice' => $item['DeliveryPrice'] ?? null,
                         //'departmentID' => $item['DepartmentID'] ?? null,
                         //'departmentName' => $item['DepartmentName'] ?? null,
-                        'doc_line' => $item['DocLine'] ?? null,
-                        'doc_number' => $item['DocNumber'] ?? null,
+                        /////'doc_line' => $item['DocLine'] ?? null,
+                        //'doc_number' => $item['DocNumber'] ?? null,
                         //'docTime' => $item['DocTime'] ?? null,
                         //'docType' => $item['DocType'] ?? null,
                         //'fromHourAsp' => $item['FromHourAsp'] ?? null,
                         //'groupID' => $item['GroupID'] ?? null,
                         //'groupName' => $item['GroupName'] ?? null,
                         //'HomeNumber' => $item['HomeNumber'] ?? null,
-                        'item_id' => $item['ItemID'] ?? null,
-                        'item_name' => $item['ItemName'] ?? null,
-                        'lukat_line' => $item['LukatLine'] ?? null,
-                        'mikod' => $item['Mikod'] ?? null,
-                        'mivza_kod' => $item['MivzaKod'] ?? null,
+                        'id' => $item['ItemID'] ?? null,
+                        'name' => $item['ItemName'] ?? null,
+                        //'lukat_line' => $item['LukatLine'] ?? null,
+                        //'mikod' => $item['Mikod'] ?? null,
+                        //'mivza_kod' => $item['MivzaKod'] ?? null,
                         //'orderC' => $item['OrderC'] ?? null,
                         'order_source' => $item['OrderSource'] ?? null,
                         'price' => $item['Price'] ?? null,
-                        'provide_line' => $item['ProvideLine'] ?? null,
-                        'quantity' => $item['Quantity'] ?? null,
+                        //'provide_line' => $item['ProvideLine'] ?? null,
+                        'amount' => $item['Quantity'] ?? null,
                         //'ref' => $item['Ref'] ?? null,
                         //'remarks' => $item['Remarks'] ?? null,
                         //'scmDis' => $item['ScmDis'] ?? null,
@@ -147,7 +159,7 @@ class GetCustomersOrders extends Base
                         //'userID' => $item['UserID'] ?? null,
                         //'userName' => $item['UserName'] ?? null,
                         //'floor' => $item['floor'] ?? null,
-                        'amount' =>  1,
+                        //'amount' =>  1,
                         'barcode' => $item['ItemID'] ?? null
                     ];
                 })

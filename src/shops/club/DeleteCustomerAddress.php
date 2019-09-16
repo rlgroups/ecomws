@@ -43,13 +43,5 @@ class DeleteCustomerAddress extends Base
         ];
     }
 
-    public function mapDataResponse($data)
-    {
-        return [
-            'data' => $data,
-            'Status' => $data
-        ];
-    }
-
 
 }
