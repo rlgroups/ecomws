@@ -49,8 +49,8 @@ class GetCustomersOrders extends Base
     {
         return [
             'Token' => Self::$token,
-            'FromOrder' => $this->fromOrder,
-            'ToOrder' => $this->toOrder,
+            /*'FromOrder' => $this->fromOrder,
+            'ToOrder' => $this->toOrder,*/
         ];
     }
 
@@ -67,7 +67,7 @@ class GetCustomersOrders extends Base
         return [
             'data' => collect($data['ListOrders']['ClsGetCustomersOrdersOutList'] ?? [])->map(function ($order) {
 
-            $linesInOrder = $order['ListItemsInOrder']['ClsGetCustomersOrdersOut'];
+            $linesInOrder = $order['ListItemsInOrder']['ClsGetCustomersOrdersOut'] ?? [] ;
 
             if (!isset($linesInOrder[0])) {
                 $linesInOrder = [$linesInOrder];

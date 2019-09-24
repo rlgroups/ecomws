@@ -46,8 +46,8 @@ class CartInMelay extends Base
         }
 
         return [
-            'item_list' => $data['itemlist'],
-            'less_items' => $data['lessitems'],
+            'item_list' => $data['itemlist'] ?? null,
+            'less_items' => $data['lessitems'] ?? null,
             'cart_qty' => $data['CartQty'],
             'Status' => $data['Status']
         ];
