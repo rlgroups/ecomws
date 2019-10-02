@@ -36,7 +36,7 @@ class GetPriceOfCart extends Base
     protected $items;
 
 
-    public function setItems($item)
+    public function setItems($items)
     {
         $this->items = $items;
 
@@ -53,32 +53,18 @@ class GetPriceOfCart extends Base
         ];
     }
 
-    public function getPriceDelivery(Request $request)
+    public function mapDataResponse($data)
     {
-        /*$attr = $this->validate($request, [
-            'Token' => 'required',
-            'SupplyDayC' => 'required',
-            'Cost' => 'required'
-            'StoreId' => 'required'
-        ]);*/
-        return (new GetPriceDelivery())
-                    ->setToken($this->token)
-                    ->setSupplyDayC(1109)
-                    ->setCost(500)
-                    ->setStoreId(179)
-                    ->request();
-    }
+        if(!empty($data['itemlist']) && !empty($data['itemlist']['CheckoutItem']) && !isset($data['itemlist']['CheckoutItem'][0])){
+            $data['itemlist']['CheckoutItem'] = [$data['itemlist']['CheckoutItem']];
+        }
 
-    public function getPriceOfCart(Request $request)
-    {
-        return (new GetPriceOfCart())
-                    ->setToken($this->token)
-                    ->setStoreId(179)
-                    ->setItems([
-                        'item' => [
+        return [
+            'item_list' => $data['itemlist'] ?? null,
+            'less_items' => $data['lessitems'] ?? null,
+            'cart_qty' => $data['CartQty'],
+            'Status' => $data['Status']
+        ];
 
-                        ]
-                    ])
-                    ->request();
     }
 }
