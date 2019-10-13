@@ -38,4 +38,16 @@ class ResetPassword extends Base
         ];
     }
 
+    public function mapDataResponse($data)
+    {
+        return [
+            'Status' => $data['Status'],
+            'data' => [
+                'customer_c' => $data['CustomerC'] ?? null,
+                'group' => $data['Group'] ?? null,
+                'message' => $data['Message'] ?? null,
+                'user_ID' => $data['user_ID'] ?? null,
+            ]
+        ];
+    }
 }
