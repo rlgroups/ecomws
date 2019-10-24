@@ -4,6 +4,7 @@ namespace Ecomws;
 use DB;
 use FluidXml\FluidXml;
 use GuzzleHttp\Client;
+use GuzzleHttp\TransferStats;
 use GuzzleHttp\Exception\RequestException;
 
 trait ApiRequestor {
@@ -72,6 +73,9 @@ trait ApiRequestor {
 
         $status = 1;
 
+        $request_time = null;
+        $request_data = null;
+
         try {
             $request_send = date("Y-m-d H:i:s");
             $responseData = $http->request('POST', $baseUrl, [
@@ -80,7 +84,23 @@ trait ApiRequestor {
                     "Content-Type" => "application/soap+xml",
                     // "Content-Length" => "length",
                     "Host" => $host,
-                ]
+                ],
+                'on_stats' => function (TransferStats $stats) use(&$request_time ,&$request_data) {
+                    $request_time = $stats->getTransferTime();
+                    $request_data = $stats->getHandlerStats();
+
+                    // You must check if a response was received before using the
+                    // response object.
+                    /*if ($stats->hasResponse()) {
+                        echo $stats->getResponse()->getStatusCode();
+                    } else {
+                        // Error data is handler specific. You will need to know what
+                        // type of error data your handler uses before using this
+                        // value.
+                        var_dump($stats->getHandlerErrorData());
+                    }*/
+                }
+
             ]);
 
             $xmlResponse = (string) $responseData->getBody();
@@ -109,7 +129,7 @@ trait ApiRequestor {
             $data = null;
         }
 
-        $this->outputLog($xmlRequest, $xmlResponse, $request_send, $data);
+        $this->outputLog($xmlRequest, $xmlResponse, $request_send, $data, $request_time, $request_data);
 
         if ($responseData && $status) {
             return $data;
@@ -197,7 +217,7 @@ trait ApiRequestor {
 
     }
 
-    public function outputLog($xmlRequest, $xmlResponse, $request_send, $data)
+    public function outputLog($xmlRequest, $xmlResponse, $request_send, $data, $request_time, $request_data)
     {
         $log = [
             'user_id' => null,
@@ -206,6 +226,8 @@ trait ApiRequestor {
             'request' => $xmlRequest,
             'response' => $xmlResponse,
             'data' => isset($data) ? json_encode($data) : null,
+            'request_time' => $request_time ?? null,
+            'request_data' => isset($request_data) ? json_encode($request_data) : null,
             'request_at' => $request_send,
             'response_at' => date('Y-m-d H:i:s')
         ];

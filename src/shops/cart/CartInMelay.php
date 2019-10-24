@@ -39,19 +39,19 @@ class CartInMelay extends Base
         ];
     }
 
-    // public function mapDataResponse($data)
-    // {
-    //     if(!empty($data['itemlist']) && !empty($data['itemlist']['CheckoutItem']) && !isset($data['itemlist']['CheckoutItem'][0])){
-    //         $data['itemlist']['CheckoutItem'] = [$data['itemlist']['CheckoutItem']];
-    //     }
+    /*public function mapDataResponse($data)
+    {
+        if(!empty($data['itemlist']) && !empty($data['itemlist']['CheckoutItem']) && !isset($data['itemlist']['CheckoutItem'][0])){
+            $data['itemlist']['CheckoutItem'] = [$data['itemlist']['CheckoutItem']];
+        }
 
-    //     return [
-    //         'item_list' => $data['itemlist'] ?? null,
-    //         'less_items' => $data['lessitems'] ?? null,
-    //         'cart_qty' => $data['CartQty'],
-    //         'Status' => $data['Status']
-    //     ];
+        return [
+            'item_list' => $data['itemlist']['CheckoutItem'] ?? null,
+            'less_items' => $data['lessitems'] ?? null,
+            'cart_qty' => $data['CartQty'],
+            'Status' => $data['Status']
+        ];
 
-    // }
+    }*/
 
 }

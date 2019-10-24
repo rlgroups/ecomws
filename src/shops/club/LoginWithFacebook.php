@@ -78,11 +78,21 @@ class LoginWithFacebook extends Base
         return [
             'LoginID' => Self::$loginID,
             'LoginPassword' => Self::$loginPassword,
-            'Token' => 'EAAhBoECWZAW0BADDJQXMesczs9m00gnzNvsxZBGg6V9Rv5ZBZADEseh1DX6XR1VZCAXeryXGtqyH6kVrwxAW4oWNTCpJpuJMu1wvBF0ztEPoUkCboMyaNZBKMUNW58JeDxeZByM0JfQkJDIlaUMZBX8UZBmwZBiNrOBkbIiCI4hjxi0cVc1qOwVqd03bSQyZBmKD8RbFiVF4EJ0QKtvcLP9NBeH',//$this->tokenFacebook,
+            'Token' => $this->tokenFacebook,
             'Email' => $this->email,
             'firstName' => $this->firstName,
             'lastName' => $this->lastName
         ];
     }
 
+    public function mapDataResponse($data)
+    {
+        return [
+            'customer_c' => $data['CustomerC'] ?? null,
+            'token' => $data['Token'] ?? null,
+            'group' => $data['Group'] ?? null,
+            'user_ID' => $data['user_ID'] ?? null,
+            'Status' => $data['Status'] ?? null,
+        ];
+    }
 }

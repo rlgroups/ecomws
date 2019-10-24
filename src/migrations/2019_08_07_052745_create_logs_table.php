@@ -21,6 +21,8 @@ class CreateLogsTable extends Migration
             $table->longText('request')->nullable();
             $table->longText('response')->nullable();
             $table->longText('data')->nullable();
+            $table->string('request_time')->nullable();
+            $table->longText('request_data')->nullable();
             $table->timestamp('request_at')->nullable()->index();
             $table->timestamp('response_at')->nullable();
             $table->timestamps();
