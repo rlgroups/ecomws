@@ -63,6 +63,7 @@ class GetPriceOfCart extends Base
             'item_list' => $data['itemlist'] ?? null,
             'less_items' => $data['lessitems'] ?? null,
             'cart_qty' => $data['CartQty'],
+            'cart_price' => $data['CartPrice'] ?? null,
             'Status' => $data['Status']
         ];
 
