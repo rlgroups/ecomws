@@ -33,6 +33,13 @@ class Comax
     public $reLogin = false;
 
     /**
+     * The userId send log.
+     *
+     * @var string
+     */
+    public $userId = null;
+
+    /**
      * The version of the Comax API to use for requests.
      *
      * @var string
@@ -51,6 +58,16 @@ class Comax
 
     public function setReLogin($function) {
         $this->reLogin = $function();
+    }
+
+    /*public function getUserId() {
+        return $this->userId;
+    }*/
+
+    public function setUserId($userId) {
+        $this->userId = $userId;
+
+        return $this;
     }
 
 }

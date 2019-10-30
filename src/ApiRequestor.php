@@ -20,6 +20,8 @@ trait ApiRequestor {
     // }
     public function request()
     {
+        // $customer = $this->get('customer');
+        // var_dump($customer->id);
         //tryRequest:
         $response = $this->getRequest($this);
 
@@ -220,7 +222,7 @@ trait ApiRequestor {
     public function outputLog($xmlRequest, $xmlResponse, $request_send, $data, $request_time, $request_data)
     {
         $log = [
-            'user_id' => null,
+            'user_id' => $this->userId,
             'called' => $this->endPoint,
             'ip' =>  request()->ip(),
             'request' => $xmlRequest,
