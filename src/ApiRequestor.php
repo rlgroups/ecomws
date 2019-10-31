@@ -90,17 +90,6 @@ trait ApiRequestor {
                 'on_stats' => function (TransferStats $stats) use(&$request_time ,&$request_data) {
                     $request_time = $stats->getTransferTime();
                     $request_data = $stats->getHandlerStats();
-
-                    // You must check if a response was received before using the
-                    // response object.
-                    /*if ($stats->hasResponse()) {
-                        echo $stats->getResponse()->getStatusCode();
-                    } else {
-                        // Error data is handler specific. You will need to know what
-                        // type of error data your handler uses before using this
-                        // value.
-                        var_dump($stats->getHandlerErrorData());
-                    }*/
                 }
 
             ]);
@@ -131,7 +120,7 @@ trait ApiRequestor {
             $data = null;
         }
 
-        $this->outputLog($xmlRequest, $xmlResponse, $request_send, $data, $request_time, $request_data);
+        $data['log_id'] = $this->outputLog($xmlRequest, $xmlResponse, $request_send, $data, $request_time, $request_data);
 
         if ($responseData && $status) {
             return $data;
@@ -158,12 +147,19 @@ trait ApiRequestor {
 
             $status = isset($data['Status']) ? $data['Status'] : '3';
 
-            return [
-                'status' => $status,
-                'data' => $data['data'] ?? $data,
-                'all_data' => $array['soap:Body'],
-                'xmlRequest' => $xmlRequest
-            ];
+            if(env('APP_ENV') == 'local'){
+                return [
+                    'status' => $status,
+                    'data' => $data['data'] ?? $data,
+                    'all_data' => $array['soap:Body'],
+                    'xmlRequest' => $xmlRequest
+                ];
+            }else {
+                return [
+                    'status' => $status,
+                    'data' => $data['data'] ?? $data,
+                ];
+            }
         } else {
             return [
                 'status' => '2'
@@ -233,7 +229,8 @@ trait ApiRequestor {
             'request_at' => $request_send,
             'response_at' => date('Y-m-d H:i:s')
         ];
-        DB::table('logs')->insert($log);
+        return DB::table('logs')->insertGetId($log);
+
     }
 
     function xmlToArray($xml) {

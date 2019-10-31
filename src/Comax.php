@@ -60,10 +60,6 @@ class Comax
         $this->reLogin = $function();
     }
 
-    /*public function getUserId() {
-        return $this->userId;
-    }*/
-
     public function setUserId($userId) {
         $this->userId = $userId;
 
