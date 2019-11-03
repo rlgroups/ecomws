@@ -80,7 +80,7 @@ class GetSupplyDate extends Base
                     ? $data['ListTime']['DaysTime']
                     : [$data['ListTime']['DaysTime']]
                 )
-            : null;
+            : -1;
         return [
             'Status' => $data['Status'],
             'data' => $data['data']

@@ -42,9 +42,7 @@ class GetTaxReceiptInvoiceSalesPDF extends Base
     {
         return [
             'Status' => '200',
-            'data' => [
-                'pdf' => $data
-            ]
+            'data' => $data
         ];
     }
 }
