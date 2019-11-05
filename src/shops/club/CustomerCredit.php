@@ -28,7 +28,7 @@ class CustomerCredit extends Base
                     ? $data['ListCredits']['CustomerCredit']
                     : [$data['ListCredits']['CustomerCredit']]
                 )
-            : null;
+            : -1;
 
 
         return [
