@@ -62,10 +62,8 @@ class GetSupplyDate extends Base
     {
         return [
             'Token' => Self::$token,
-            //'LoginID' => 'ramitest',//Self::$loginID,
-            //'LoginPassword' => 'testrami',//Self::$loginPassword,
-            'LoginID' => '',//Self::$loginID,
-            'LoginPassword' => '',//Self::$loginPassword,
+            'LoginID' => Self::$loginID,
+            'LoginPassword' => Self::$loginPassword,
             'City' => $this->city,
             'Street' => $this->street,
             'StreetNo' => $this->streetNo

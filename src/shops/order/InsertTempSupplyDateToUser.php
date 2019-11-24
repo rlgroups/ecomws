@@ -47,9 +47,9 @@ class InsertTempSupplyDateToUser extends Base
     public function toArray()
     {
         return [
+            'Token' => Self::$token,
             'LoginID' => Self::$loginID,
             'LoginPassword' => Self::$loginPassword,
-            //'Token' => Self::$token,
             'SupplyDay' => $this->supplyDay,
             'SupplyDate' => $this->supplyDate,
         ];
