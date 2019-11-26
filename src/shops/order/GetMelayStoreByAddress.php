@@ -65,8 +65,8 @@ class GetMelayStoreByAddress extends Base
             'LoginPassword' => Self::$loginPassword,
             //'Token' => Self::$token,
             'CityId' => $this->cityId,//245
-            /*'StreetId' => $this->streetId,
-            'StreetNo' => $this->streetNo*/
+            'StreetId' => $this->streetId,
+            'StreetNo' => $this->streetNo
         ];
     }
      public function mapDataResponse($data)
