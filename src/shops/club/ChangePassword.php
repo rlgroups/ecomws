@@ -28,20 +28,6 @@ class ChangePassword extends Base
 
         return $this;
     }
-    /**
-     * The string of password.
-     *
-     * @var string
-     */
-    protected $password;
-
-
-    public function setPassword($password)
-    {
-        $this->password = $password;
-
-        return $this;
-    }
 
     public function toArray()
     {
@@ -49,7 +35,7 @@ class ChangePassword extends Base
             'LoginID' => Self::$loginID,
             'LoginPassword' => Self::$loginPassword,
             'Email' => $this->email,
-            'Password' => $this->password,
+            'Password' => Self::$password,
         ];
     }
 
