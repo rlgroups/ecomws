@@ -49,8 +49,8 @@ class GetOrders extends Base
     {
         return [
             'Token' => Self::$token,
-            /*'FromOrder' => $this->fromOrder,
-            'ToOrder' => $this->toOrder,*/
+            'FromOrder' => $this->fromOrder,
+            'ToOrder' => $this->toOrder,
         ];
     }
 
