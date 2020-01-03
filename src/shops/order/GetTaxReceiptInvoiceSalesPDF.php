@@ -40,6 +40,12 @@ class GetTaxReceiptInvoiceSalesPDF extends Base
 
     public function mapDataResponse($data)
     {
+        if($data == 'Order not found' || is_array($data)){
+            return [
+                'Status' => '-1',
+                'data' => 'Order not found'
+            ];
+        }
         return [
             'Status' => '200',
             'data' => $data

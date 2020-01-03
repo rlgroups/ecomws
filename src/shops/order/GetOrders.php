@@ -81,8 +81,8 @@ class GetOrders extends Base
                 'final_price' => $order['FinalPrice'] ?? null,
                 //'firstName' => $order['FirstName'] ?? null,
                 //'lastName' => $order['LastName'] ?? null,
-                //'from_hour_asp' => $order['FromHourAsp'] ?? null,------change
-                //'to_hour_asp' => $order['ToHourAsp'] ?? null,------change
+                'from_hour_asp' => $order['FromHourAsp'] ?? null,//------change
+                'to_hour_asp' => $order['ToHourAsp'] ?? null,//------change
                 'date_asp' => $order['DateAsp'] ?? null,
                 //email: order.Email,
                 'order_c' => $order['OrderC'] ?? null,
