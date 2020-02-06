@@ -1,11 +1,11 @@
 {
-    "name": "ruchama.as/ecomws",
+    "name": "rlgroups/ecomws",
     "description": "Connection to api",
     "license": "MIT",
     "authors": [
         {
             "name": "Rl-group",
-            "email": "ruchama604@gmail.com"
+            "email": "yehudafh@gmail.com"
         }
     ],
     "require": {
