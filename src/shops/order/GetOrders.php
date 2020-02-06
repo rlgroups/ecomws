@@ -102,6 +102,7 @@ class GetOrders extends Base
                 'loadingItems' => false,
                 'email' => $order['Email'] ?? null,
                 'status' => $order['Status'] == '0' ? '0' : $order['Status'],
+                'status_order' => $order['OrderStatus'] ?? null,
 
                 'scm_dis' => $order['ScmDis'] ?? null,
                 //'tel_asp' => $linesInOrder[0]['TelAsp'] ?? null,------change
