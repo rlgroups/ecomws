@@ -217,6 +217,8 @@ trait ApiRequestor {
 
     public function outputLog($xmlRequest, $xmlResponse, $request_send, $data, $request_time, $request_data)
     {
+        $logID = 0;
+
         $log = [
             'user_id' => $this->userId,
             'called' => $this->endPoint,
@@ -229,7 +231,14 @@ trait ApiRequestor {
             'request_at' => $request_send,
             'response_at' => date('Y-m-d H:i:s')
         ];
-        return DB::table('logs')->insertGetId($log);
+
+        try {
+            $logID = DB::table('logs')->insertGetId($log);
+        } catch (\Exception $e) {
+
+        }
+
+        return $logID;
 
     }
 
