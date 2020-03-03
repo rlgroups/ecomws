@@ -238,6 +238,8 @@ trait ApiRequestor {
 
         }
 
+        DB::disconnect();
+
         return $logID;
 
     }
