@@ -17,7 +17,7 @@ class CreditGetTokenLogin extends Base
     public function toArray()
     {
         return [
-            // 'Token' => Self::$token,
+            'Token' => Self::$token,
             'Loginid' => Self::$loginID,
             'Password' => Self::$password
         ];
