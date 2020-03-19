@@ -63,7 +63,7 @@ trait ApiRequestor {
         $http = new Client([
             // 'curl' => [CURLOPT_SSL_VERIFYPEER => false],
             // 'verify' => false,
-            // 'timeout' => 10000,
+            'timeout' => 30,
             // 'proxy' => '127.0.0.1:8888',
         ]);
 
