@@ -233,15 +233,14 @@ trait ApiRequestor {
         ];
 
         try {
-            $logID = DB::table('logs')->insertGetId($log);
+            $logID = DB::connection('dblogs')->table('logs')->insertGetId($log);
         } catch (\Exception $e) {
 
         }
 
-        DB::disconnect();
+        DB::connection('dblogs')->disconnect();
 
         return $logID;
-
     }
 
     function xmlToArray($xml) {
