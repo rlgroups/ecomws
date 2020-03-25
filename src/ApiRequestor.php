@@ -118,6 +118,18 @@ trait ApiRequestor {
 
             $xmlResponse = $jsonBody;
             $data = null;
+        } catch (\Exception $e) {
+            $status = 0;
+
+            $responseData = [
+                'RequestException' => 1
+            ];
+
+            $data = [
+                'status' => -1,
+            ];
+
+            $xmlResponse = $e->getMessage();
         }
 
         $data['log_id'] = $this->outputLog($xmlRequest, $xmlResponse, $request_send, $data, $request_time, $request_data);
