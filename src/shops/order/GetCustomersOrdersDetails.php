@@ -58,6 +58,7 @@ class GetCustomersOrdersDetails extends Base
             return [
                 'doc_number' => $order['DocNumber'] ?? null,
                 'delivery_price' => $order['DeliveryPrice'] ?? null,
+                'supply_date_id' => $order['SupplyDateId'] ?? null,
                 'total_sum_with_scm_dis' => $order['TotalSumWithScmDis'] ?? null,
                 'total_sum_without_scm_dis' => $order['TotalSumWithoutScmDis'] ?? null,
                 'final_price' => $order['FinalPrice'] ?? null,
