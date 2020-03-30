@@ -13,6 +13,9 @@ class EditOrder extends Base
      */
     protected $endPoint = 'EditOrder';
 
+
+    protected $status = 0;
+
     /**
      * The string of orderId.
      *
@@ -43,6 +46,13 @@ class EditOrder extends Base
         return $this;
     }
 
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
     /**
      * The array of items.
      *
@@ -65,7 +75,8 @@ class EditOrder extends Base
             'Token' => Self::$token,
             'OrderId' => $this->orderId,
             'order' => $this->order,
-            'Items' => $this->items
+            'Items' => $this->items,
+            'Comax616Status' => $this->status,
         ];
     }
 

@@ -13,6 +13,8 @@ class CompleteOrder extends Base
      */
     protected $endPoint = 'CompleteOrder';
 
+    protected $status = 0;
+
     /**
      * The array of order.
      *
@@ -49,8 +51,16 @@ class CompleteOrder extends Base
         return [
             'Token' => Self::$token,
             'order' => $this->order,
-            'Items' => $this->items
+            'Items' => $this->items,
+            'Comax616Status' => $this->status,
         ];
+    }
+
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
     }
 
     public function mapDataResponse($data)
