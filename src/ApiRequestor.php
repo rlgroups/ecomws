@@ -231,28 +231,48 @@ trait ApiRequestor {
     {
         $logID = 0;
 
-        $log = [
-            'user_id' => $this->userId,
-            'called' => $this->endPoint,
-            'ip' =>  request()->ip(),
-            'request' => $xmlRequest,
-            'response' => $xmlResponse,
-            'data' => isset($data) ? json_encode($data) : null,
-            'request_time' => $request_time ?? null,
-            'request_data' => isset($request_data) ? json_encode($request_data) : null,
-            'request_at' => $request_send,
-            'response_at' => date('Y-m-d H:i:s')
-        ];
-
         try {
-            $logID = DB::connection('dblogs')->table('logs')->insertGetId($log);
+            if (config('services.elastic_log')) {
+                $client = \Elasticsearch\ClientBuilder::create()
+                        ->setHosts([config('services.elastic_log')])
+                        ->build();
+
+                 $params = [
+                    'index' => 'ecomws-' . date('Ymd'),
+                    // 'routing'   => 'company_xyz',
+                    // 'id'    => '1',
+                    'body'  => [
+                        'timestamp' => time(),
+                        'user_id' => $this->userId,
+                        'called' => $this->endPoint,
+                        'ip' =>  request()->ip(),
+                        'request' => $this->toArray(),
+                        // 'response' => $xmlResponse,
+                        'data' => isset($data) ? json_encode($data) : null,
+                        'request_time' => $request_time ?? null,
+                        'request_data' => isset($request_data) ? json_encode($request_data) : null,
+                        'request_at' => $request_send,
+                        'response_at' => date('Y-m-d H:i:s')
+                    ],
+                    // 'client' => [
+                    //     'future' => 'lazy'
+                    // ]
+                ];
+
+                if ($this->endPoint != 'GetPriceOfCartTest') {
+                    $params['body']['xml'] = [
+                        'request' => $xmlRequest,
+                        'response' => $xmlResponse,
+                    ];
+                }
+
+                $response = $client->index($params);
+            }
         } catch (\Exception $e) {
 
         }
 
-        DB::connection('dblogs')->disconnect();
-
-        return $logID;
+        return $response['_id'] ?? null;
     }
 
     function xmlToArray($xml) {
