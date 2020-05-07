@@ -238,7 +238,7 @@ trait ApiRequestor {
                         ->build();
 
                  $params = [
-                    'index' => 'ecomws-' . date('Ymd'),
+                    'index' => 'ecomws-' . date('Y.m.d'),
                     // 'routing'   => 'company_xyz',
                     // 'id'    => '1',
                     'body'  => [
@@ -246,13 +246,13 @@ trait ApiRequestor {
                         'user_id' => $this->userId,
                         'called' => $this->endPoint,
                         'ip' =>  request()->ip(),
-                        'request' => $this->toArray(),
+                        'comax_request' => $this->toArray(),
                         // 'response' => $xmlResponse,
-                        'data' => isset($data) ? json_encode($data) : null,
+                        'comax_response' => $data ?? null,
                         'request_time' => $request_time ?? null,
-                        'request_data' => isset($request_data) ? json_encode($request_data) : null,
-                        'request_at' => $request_send,
-                        'response_at' => date('Y-m-d H:i:s')
+                        'request_data' => $request_data ?? null,
+                        'request_at' => date('c', strtotime($request_send)),
+                        'response_at' => date('c')
                     ],
                     // 'client' => [
                     //     'future' => 'lazy'
@@ -265,6 +265,27 @@ trait ApiRequestor {
                         'response' => $xmlResponse,
                     ];
                 }
+
+                // $client->indices()->create([
+                //     'index' => 'ecomws-' . date('Y.m.d'),
+                //     'body' => [
+                //         "mappings" => [
+                //             "properties" => [
+                //                 "timestamp" => ["type" => "date"],
+                //                 "request_at" => ["type" => "date"],
+                //                 "response_at" => ["type" => "date"],
+                //                 "called" => ["type" => "keyword"],
+                //                 "ip" => ["type" => "ip"],
+                //                 "comax_request" => ["type" => "object"],
+                //                 "comax_response" => ["type" => "object"],
+                //                 "request_data" => ["type" => "object"],
+                //                 "request_time" => ["type" => "float"],
+                //                 "user_id" => ["type" => "keyword"],
+                //                 "xml" => ["type" => "object", "enabled" => false],
+                //             ]
+                //         ]
+                //     ]
+                // ]);
 
                 $response = $client->index($params);
             }
