@@ -85,7 +85,7 @@ trait ApiRequestor {
                 'headers' => [
                     "Content-Type" => "application/soap+xml",
                     // "Content-Length" => "length",
-                    "Host" => $host,
+                    // "Host" => $host,
                 ],
                 'on_stats' => function (TransferStats $stats) use(&$request_time ,&$request_data) {
                     $request_time = $stats->getTransferTime();
