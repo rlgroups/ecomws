@@ -62,7 +62,7 @@ trait ApiRequestor {
 
         $http = new Client([
             // 'curl' => [CURLOPT_SSL_VERIFYPEER => false],
-            // 'verify' => false,
+            'verify' => false,
             'timeout' => 30,
             // 'proxy' => '127.0.0.1:8888',
         ]);
@@ -71,7 +71,7 @@ trait ApiRequestor {
 
         $apiBase = static::$apiBase;
 
-        $baseUrl = "http://{$host}/{$apiBase}?op={$this->endPoint}";
+        $baseUrl = "{$host}/{$apiBase}?op={$this->endPoint}";
 
         $status = 1;
 
