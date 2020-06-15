@@ -14,6 +14,21 @@ class GetPriceOfCartTest extends Base
     protected $endPoint = 'GetPriceOfCartTest';
 
     /**
+     * The int of IncClubCcPromo.
+     *
+     * @var int
+     */
+    protected $IncClubCcPromo;
+
+
+    public function setIncClubCcPromo($incClubCcPromo)
+    {
+        $this->incClubCcPromo = $incClubCcPromo;
+
+        return $this;
+    }
+
+    /**
      * The int of storeId.
      *
      * @var int
@@ -65,7 +80,8 @@ class GetPriceOfCartTest extends Base
             'Token' => Self::$token,
             'StoreId' => $this->storeId,
             'AddListItems' => $this->items,
-            'SwSal' => $this->swSal
+            'SwSal' => $this->swSal,
+            'IncClubCcPromo' => $this->incClubCcPromo
         ];
     }
 
