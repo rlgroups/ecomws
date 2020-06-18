@@ -81,7 +81,7 @@ class GetPriceOfCartTest extends Base
             'StoreId' => $this->storeId,
             'AddListItems' => $this->items,
             'SwSal' => $this->swSal,
-            'IncClubCcPromo' => $this->incClubCcPromo
+            'IncClubCcPromo' => $this->incClubCcPromo ?? null
         ];
     }
 
